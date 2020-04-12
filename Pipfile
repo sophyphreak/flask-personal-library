@@ -11,6 +11,7 @@ flask-restful = "*"
 flask-talisman = "*"
 flask-sqlalchemy = "*"
 flask-cors = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"
