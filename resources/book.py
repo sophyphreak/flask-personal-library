@@ -6,13 +6,14 @@ from models.comment import CommentModel
 
 class Book(Resource):
     parser = reqparse.RequestParser()
-    parser.add_argument("comment_text", type=str, location="form")
+    parser.add_argument("comment_text", type=str)
 
     def get(self, book_id):
         return BookModel.find_by_id(book_id).json()
 
     def post(self, book_id):
         comment_text = Book.parser.parse_args()["comment_text"]
+        print(Book.parser.parse_args())
         new_comment = CommentModel(comment_text=comment_text, book_id=book_id)
         new_comment.save_to_db()
         return BookModel.find_by_id(book_id).json()
@@ -28,7 +29,7 @@ class Book(Resource):
 
 class BookList(Resource):
     parser = reqparse.RequestParser()
-    parser.add_argument("title", type=str, location="form")
+    parser.add_argument("title", type=str)
 
     def get(self):
         book_list = BookModel.get_all_books()
