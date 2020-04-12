@@ -20,7 +20,9 @@ class Book(Resource):
     def delete(self, book_id):
         book = BookModel.find_by_id(book_id)
         book.delete_from_db()
-        return {"message": "delete successful"}
+        return {
+            "message": "delete successful"
+        }
 
 
 class BookList(Resource):
@@ -38,11 +40,8 @@ class BookList(Resource):
         return new_book.json()
 
     def delete(self):
-        try:
-            number_of_books_deleted = BookModel.delete_all_books()
-            number_of_comments_deleted = CommentModel.delete_all_comments()
-            return {
-                "message": f"{number_of_books_deleted} books and {number_of_comments_deleted} comments successfully deleted"
-            }
-        except:
-            pass
+        number_of_books_deleted = BookModel.delete_all_books()
+        number_of_comments_deleted = CommentModel.delete_all_comments()
+        return {
+            "message": f"{number_of_books_deleted} books successfully deleted"
+        }
