@@ -28,9 +28,11 @@ class CommentModel(db.Model):
 
     @classmethod
     def delete_all_from_book(cls, book_id):
-        number_deleted = cls.query.filter_by(book_id=book_id).delete()
+        comments_to_delete = cls.query.filter_by(book_id=book_id).all()
+        for comment in comments_to_delete:
+            db.session.delete(comment)
         db.session.commit()
-        return number_deleted
+        return len(comments_to_delete)
 
     @classmethod
     def delete_all_comments(cls):
