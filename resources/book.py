@@ -39,8 +39,10 @@ class BookList(Resource):
 
     def delete(self):
         try:
-            number_deleted = BookModel.delete_all_books()
-            CommentModel.delete_all_comments()
-            return {"message": f"{number_deleted} successfully deleted"}
+            number_of_books_deleted = BookModel.delete_all_books()
+            number_of_comments_deleted = CommentModel.delete_all_comments()
+            return {
+                "message": f"{number_of_books_deleted} books and {number_of_comments_deleted} comments successfully deleted"
+            }
         except:
             pass
