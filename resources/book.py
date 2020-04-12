@@ -20,7 +20,7 @@ class Book(Resource):
 
     def delete(self, book_id):
         book = BookModel.find_by_id(book_id)
-        number_of_comments_deleted =  CommentModel.delete_all_from_book(book_id)
+        number_of_comments_deleted = CommentModel.delete_all_from_book(book_id)
         book.delete_from_db()
         return {
             "message": f"1 book ands {number_of_comments_deleted} comments deleted successfully."
