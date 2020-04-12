@@ -26,7 +26,8 @@ class CommentModel(db.Model):
     def find_by_id(cls, _id):
         return cls.query.filter_by(_id=_id).first()
 
-    def delete_all_from_Book(cls, book_id):
+    @classmethod
+    def delete_all_from_book(cls, book_id):
         number_deleted = cls.query.filter_by(book_id=book_id).delete()
         db.session.commit()
         return number_deleted
